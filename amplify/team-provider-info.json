@@ -30,12 +30,12 @@
       "UnauthRoleName": "amplify-frontend-experiment-49df1-unauthRole",
       "StackName": "amplify-frontend-experiment-49df1",
       "StackId": "arn:aws:cloudformation:us-east-1:211125654407:stack/amplify-frontend-experiment-49df1/d14af370-b97f-11ef-bd6d-0affd47d56c1",
-      "AmplifyAppId": "d1k7r05ln5the7"
+      "AmplifyAppId": "dc7qzmkgzroc5"
     },
     "categories": {
       "hosting": {
         "amplifyhosting": {
-          "appId": "d1k7r05ln5the7",
+          "appId": "dc7qzmkgzroc5",
           "type": "manual"
         }
       }
