@@ -1,0 +1,71 @@
+0 verbose cli /opt/homebrew/Cellar/node/23.7.0/bin/node /opt/homebrew/bin/npm
+1 info using npm@10.9.2
+2 info using node@v23.7.0
+3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/aaron/Downloads/group_decision_making-main_deploy_to_aws/frontend/.npmrc
+5 silly config load:file:/Users/aaron/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm ci
+8 verbose argv "ci" "--cache" ".npm" "--prefer-offline"
+9 verbose logfile logs-max:10 dir:/Users/aaron/Downloads/group_decision_making-main_deploy_to_aws/frontend/.npm/_logs/2025-03-10T23_20_50_587Z-
+10 verbose logfile /Users/aaron/Downloads/group_decision_making-main_deploy_to_aws/frontend/.npm/_logs/2025-03-10T23_20_50_587Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest eslint-plugin-vue@^7.0.0
+15 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-vue cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/eslint-plugin-vue 127ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/eslint-plugin-vue set size:undefined disposed:false
+18 silly fetch manifest eslint@^7.12.1
+19 silly packumentCache full:https://registry.npmjs.org/eslint cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/npm 570ms
+21 http fetch GET 200 https://registry.npmjs.org/eslint 59ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/eslint set size:undefined disposed:false
+23 verbose stack Error: could not resolve
+23 verbose stack     at PlaceDep.failPeerConflict (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/place-dep.js:503:25)
+23 verbose stack     at new PlaceDep (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/place-dep.js:157:21)
+23 verbose stack     at #buildDepStep (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:920:18)
+23 verbose stack     at async Arborist.buildIdealTree (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:181:7)
+23 verbose stack     at async CI.exec (/opt/homebrew/lib/node_modules/npm/lib/commands/ci.js:63:5)
+23 verbose stack     at async Npm.exec (/opt/homebrew/lib/node_modules/npm/lib/npm.js:207:9)
+23 verbose stack     at async module.exports (/opt/homebrew/lib/node_modules/npm/lib/cli/entry.js:74:5)
+24 error code ERESOLVE
+25 error ERESOLVE could not resolve
+26 error
+27 error While resolving: @vue/eslint-config-standard@6.1.0
+27 error Found: eslint-plugin-vue@8.4.1[2m[22m
+27 error [2mnode_modules/eslint-plugin-vue[22m
+27 error   [34mdev[39m eslint-plugin-vue@"^8.0.3" from the root project
+27 error
+27 error Could not resolve dependency:
+27 error [95mpeer[39m eslint-plugin-vue@"^7.0.0" from @vue/eslint-config-standard@6.1.0[2m[22m
+27 error [2mnode_modules/@vue/eslint-config-standard[22m
+27 error   [34mdev[39m @vue/eslint-config-standard@"^6.1.0" from the root project
+27 error
+27 error Conflicting peer dependency: eslint-plugin-vue@7.20.0[2m[22m
+27 error [2mnode_modules/eslint-plugin-vue[22m
+27 error   [95mpeer[39m eslint-plugin-vue@"^7.0.0" from @vue/eslint-config-standard@6.1.0[2m[22m
+27 error   [2mnode_modules/@vue/eslint-config-standard[22m
+27 error     [34mdev[39m @vue/eslint-config-standard@"^6.1.0" from the root project
+27 error
+27 error Fix the upstream dependency conflict, or retry
+27 error this command with --force or --legacy-peer-deps
+27 error to accept an incorrect (and potentially broken) dependency resolution.
+28 error
+28 error
+28 error For a full report see:
+28 error /Users/aaron/Downloads/group_decision_making-main_deploy_to_aws/frontend/.npm/_logs/2025-03-10T23_20_50_587Z-eresolve-report.txt
+29 silly unfinished npm timer idealTree:buildDeps 1741648851269
+30 silly unfinished npm timer idealTree:node_modules/@vue/eslint-config-standard 1741648851270
+31 verbose cwd /Users/aaron/Downloads/group_decision_making-main_deploy_to_aws/frontend
+32 verbose os Darwin 24.3.0
+33 verbose node v23.7.0
+34 verbose npm  v10.9.2
+35 notice
+35 notice New [31mmajor[39m version of npm available! [31m10.9.2[39m -> [34m11.2.0[39m
+35 notice Changelog: [34mhttps://github.com/npm/cli/releases/tag/v11.2.0[39m
+35 notice To update run: [4mnpm install -g npm@11.2.0[24m
+35 notice  { force: true, [Symbol(proc-log.meta)]: true }
+36 verbose exit 1
+37 verbose code 1
+38 error A complete log of this run can be found in: /Users/aaron/Downloads/group_decision_making-main_deploy_to_aws/frontend/.npm/_logs/2025-03-10T23_20_50_587Z-debug-0.log
