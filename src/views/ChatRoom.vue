@@ -227,7 +227,7 @@ export default {
         case -2: return require('@/assets/AI_moderator.jpg') // AI Moderator
         case -3: return require('@/assets/AI_participant.jpg') // Advocating AI
         case -4: return require('@/assets/AI_participant.jpg') // Disputing AI
-        default: return require('@/assets/icon.jpg')
+        default: return require('@/assets/AI_participant.jpg')
       }
     },
     getAIName (subjectId) {
