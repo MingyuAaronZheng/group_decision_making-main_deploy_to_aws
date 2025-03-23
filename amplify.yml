@@ -10,7 +10,7 @@ frontend:
     phases:
         preBuild:
             commands:
-                - 'npm install -g npm@latest' # Reinstall npm
+                # - 'npm install -g npm@latest' # Reinstall npm
                 - 'yarn install --frozen-lockfile'
         build:
             commands:
