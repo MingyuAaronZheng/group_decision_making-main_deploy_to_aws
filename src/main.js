@@ -46,9 +46,9 @@ library.add(faRobot)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Add aws global properties
-Vue.prototype.$server_url = 'http://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ccw/api/'
-Vue.prototype.$ws_url = 'ws://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ws/chat/'
-Vue.prototype.$chat_url = 'ws://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ws/chat/'
+Vue.prototype.$server_url = 'https://go.discussionexperiment.com/ccw/api/'
+Vue.prototype.$ws_url = 'ws://go.discussionexperiment.com/ws/chat/'
+Vue.prototype.$chat_url = 'ws://go.discussionexperiment.com/ws/chat/'
 Vue.prototype.$test_mode = false
 
 // use local properties
@@ -268,8 +268,8 @@ new Vue({
   data: function () {
     return {
       // aws
-      server_url: 'http://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ccw/api/',
-      chat_url: 'ws://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ws/chat/',
+      server_url: 'https://go.discussionexperiment.com/ccw/api/',
+      chat_url: 'ws://go.discussionexperiment.com/ws/chat/',
       // local
       // server_url: 'http://127.0.0.1:8000/ccw/api/',
       // chat_url: 'ws://127.0.0.1:8000/ws/chat/',
