@@ -45,11 +45,17 @@ library.add(faGavel)
 library.add(faRobot)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-// Add global properties
-Vue.prototype.$server_url = 'https://pilotexperimentmy.us-east-2.elasticbeanstalk.com/ccw/api/'
-Vue.prototype.$ws_url = 'ws://pilotexperimentmy.us-east-2.elasticbeanstalk.com/ws/chat/'
-Vue.prototype.$chat_url = 'ws://pilotexperimentmy.us-east-2.elasticbeanstalk.com/ws/chat/'
+// Add aws global properties
+Vue.prototype.$server_url = 'https://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ccw/api/'
+Vue.prototype.$ws_url = 'ws://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ws/chat/'
+Vue.prototype.$chat_url = 'ws://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ws/chat/'
 Vue.prototype.$test_mode = false
+
+// use local properties
+// Vue.prototype.$server_url = 'http://127.0.0.1:8000/ccw/api/'
+// Vue.prototype.$ws_url = 'ws://127.0.0.1:8000/ws/chat/'
+// Vue.prototype.$chat_url = 'ws://127.0.0.1:8000/ws/chat/'
+// Vue.prototype.$test_mode = true
 
 const store = new Vuex.Store({
   // plugins: [createPersistedState({
@@ -261,9 +267,12 @@ window.addEventListener('beforeunload', (event) => {
 new Vue({
   data: function () {
     return {
-      // localhost
-      server_url: 'https://pilotexperimentmy.us-east-2.elasticbeanstalk.com/ccw/api/',
-      chat_url: 'ws://pilotexperimentmy.us-east-2.elasticbeanstalk.com/ws/chat/',
+      // aws
+      server_url: 'https://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ccw/api/',
+      chat_url: 'ws://pilotexperimentmytest.us-east-2.elasticbeanstalk.com/ws/chat/',
+      // local
+      // server_url: 'http://127.0.0.1:8000/ccw/api/',
+      // chat_url: 'ws://127.0.0.1:8000/ws/chat/',
       test_mode: false,
       // AWS
       // server_url: 'https://devil-advocate.hci-study.com/ccw/api/',

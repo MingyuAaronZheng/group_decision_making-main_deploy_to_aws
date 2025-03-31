@@ -41,11 +41,14 @@ export default {
     }
   },
   mounted () { // get the worker id, study id, and session id from the URL
-    this.prolific_processor(location.href)
+    this.prolific_processor = this.prolific_processor.bind(this)
+    if (location.href.includes('?')) {
+      this.prolific_processor(location.href)
+    }
   },
   methods: {
     prolific_processor: function (url) {
-      // https://dev.d1uau7ss3lp78y.amplifyapp.com/qualificationentrance/?PROLIFIC_PID={{%PROLIFIC_PID%}}&STUDY_ID={{%STUDY_ID%}}&SESSION_ID={{%SESSION_ID%}}
+      console.log(url)
       this.platform = 'prolific'
       let prolificArray = url.split('?')[1].split('&')
       this.worker_id = prolificArray[0].split('=')[1]
