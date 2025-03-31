@@ -47,8 +47,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Add aws global properties
 Vue.prototype.$server_url = 'https://go.discussionexperiment.com/ccw/api/'
-Vue.prototype.$ws_url = 'ws://go.discussionexperiment.com/ws/chat/'
-Vue.prototype.$chat_url = 'ws://go.discussionexperiment.com/ws/chat/'
+Vue.prototype.$ws_url = 'wss://go.discussionexperiment.com/ws/chat/'
+Vue.prototype.$chat_url = 'wss://go.discussionexperiment.com/ws/chat/'
 Vue.prototype.$test_mode = false
 
 // use local properties
@@ -269,7 +269,7 @@ new Vue({
     return {
       // aws
       server_url: 'https://go.discussionexperiment.com/ccw/api/',
-      chat_url: 'ws://go.discussionexperiment.com/ws/chat/',
+      chat_url: 'wss://go.discussionexperiment.com/ws/chat/',
       // local
       // server_url: 'http://127.0.0.1:8000/ccw/api/',
       // chat_url: 'ws://127.0.0.1:8000/ws/chat/',
@@ -302,10 +302,32 @@ new Vue({
       this.websock.onmessage = this.webSocketOnMessage
       this.websock.onopen = this.webSocketOnOpen
       this.websock.onerror = this.webSocketOnError
-      this.websock.onclose = this.webSocketOnClose
+      this.websock.onclose = (e) => {
+        this.webSocketOnClose(e)
+        // Try to reconnect with exponential backoff
+        if (!this.reconnectAttempt) {
+          this.reconnectAttempt = 0
+        }
+        const maxReconnectDelay = 30000 // Maximum delay of 30 seconds
+        const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempt), maxReconnectDelay)
+        this.reconnectAttempt++
+        console.log(`WebSocket closed. Attempting to reconnect in ${delay}ms (attempt ${this.reconnectAttempt})...`)
+        setTimeout(() => {
+          if (this.$store.state.group_id) {
+            console.log('Attempting to reconnect WebSocket...')
+            this.initWebSocket()
+          }
+        }, delay)
+      }
     },
     sendWebSocketMessage (msg) {
-      this.websock.send(JSON.stringify(msg))
+      if (this.websock && this.websock.readyState === WebSocket.OPEN) {
+        this.websock.send(JSON.stringify(msg))
+      } else {
+        console.error('WebSocket not connected or not ready. Attempting to reconnect...')
+        this.initWebSocket()
+        // Consider adding a mechanism to queue messages and send them once connected
+      }
     },
     webSocketOnMessage (response) {
       let message = JSON.parse(response.data).message
@@ -399,6 +421,11 @@ new Vue({
       }
     },
     webSocketOnOpen (e) {
+      console.log('WebSocket connection established successfully')
+      // Reset reconnection attempts counter on successful connection
+      this.reconnectAttempt = 0
+      // Dispatch a custom event that components can listen for
+      window.dispatchEvent(new CustomEvent('websocket-reconnected'))
       let enter_room = {
         'code': 100,
         'data': {

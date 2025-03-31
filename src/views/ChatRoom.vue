@@ -385,6 +385,10 @@ export default {
       this.typingNotificationTimeout = setTimeout(() => {
         this.typingNotification = null
       }, 3000) // Show typing indicator for 3 seconds
+    },
+    onWebSocketReconnected () {
+      console.log('WebSocket reconnected, updating chat status')
+      this.updateChatStatus()
     }
   },
   watch: {
@@ -421,7 +425,22 @@ export default {
   mounted () {
     // Ensure WebSocket is initialized
     if (!this.$root.websock || this.$root.websock.readyState !== WebSocket.OPEN) {
-      this.$root.initWebSocket()
+      try {
+        this.$root.initWebSocket()
+        // Add a small delay before trying to send messages
+        setTimeout(() => {
+          this.updateChatStatus()
+        }, 1000)
+      } catch (error) {
+        console.error('Failed to initialize WebSocket:', error)
+        this.$bvToast.toast('Connection error. Please refresh the page.', {
+          title: 'Connection Error',
+          variant: 'danger',
+          solid: true
+        })
+      }
+    } else {
+      this.updateChatStatus()
     }
 
     // TODO TEST remove
@@ -436,8 +455,8 @@ export default {
     window.addEventListener('user-typing', (event) => this.handleTyping(event.detail))
     window.addEventListener('user-stopped-typing', () => { this.typingNotification = null })
 
-    // Existing mounted code...
-    this.updateChatStatus()
+    // Register event listener for WebSocket connection status
+    window.addEventListener('websocket-reconnected', this.onWebSocketReconnected)
   },
   beforeDestroy () {
     // Clean up event listeners
@@ -445,6 +464,7 @@ export default {
     window.removeEventListener('remove-inactive-user', this.handleInactiveUser)
     window.removeEventListener('user-typing', (event) => this.handleTyping(event.detail))
     window.removeEventListener('user-stopped-typing', () => { this.typingNotification = null })
+    window.removeEventListener('websocket-reconnected', this.onWebSocketReconnected)
 
     // Clear any existing timeouts
     if (this.typingTimeout) {
